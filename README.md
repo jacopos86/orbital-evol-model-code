@@ -6,4 +6,4 @@ this code computes the coupled spin orbital evolution with fully conserved J = L
 # installation procedure
 conda create -n pyspinorbitevol python=3.7 numpy matplotlib scipy pymatgen\
 conda activate pyspinorbitevol\
-python setup.py install\
+python setup.py install
