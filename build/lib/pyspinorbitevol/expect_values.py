@@ -230,3 +230,16 @@ def COM_expect_val(orbital_operators, rho_e, siteslist, kg, MatrixEntry):
 		# compute rho_e L
 		rho_Lx = np.matmul(rho_e, orbital_operators.COM[:,:,0])
 		rho_Ly = np.matmul(rho_e, orbital_operators.COM[:,:,1])
+		rho_Lz = np.matmul(rho_e, orbital_operators.COM[:,:,2])
+		# run over atoms
+		for i in range(siteslist.Nsites):
+			site = i+1
+			for l in siteslist.Atomslist[i].OrbitalList:
+				for ml in range(-l, l+1):
+					for ms in [-0.5, 0.5]:
+						row = MatrixEntry(siteslist.Atomslist, site, l, ml, ms)
+						col = row
+						# <L>
+						Lx_expect[i] = Lx_expect[i] + rho_Lx[row,col].real
+						Ly_expect[i] = Ly_expect[i] + rho_Ly[row,col].real
+						Lz_expect[i] = Lz_expect[i] + rho_Lz[row,col].real
